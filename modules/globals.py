@@ -1,0 +1,3 @@
+isGajra = False
+generatedWords = []
+specialWords = []
