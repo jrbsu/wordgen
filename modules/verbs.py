@@ -6,7 +6,7 @@ def replace_e(word):
 
 def check_gajra(verb):
     new_verb = re.sub(r'[iëe]$', "", verb)
-    if re.search(r'[aeëio](c|t|k|l|n|r|s|x|z|(aj|ij|oj))$', new_verb) and len(new_verb) > 1:
+    if re.search(r'[aeëio](n|d|g|t|k|s|z|c|x|l|r|n|d|g|t|k|s|z|c|x|l|r|(aj|ij|oj))$', new_verb) and len(new_verb) > 1:
         is_gajra = True
     else:
         is_gajra = False
