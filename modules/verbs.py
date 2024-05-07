@@ -51,20 +51,20 @@ def verb_table(verb_type, verb, current_word):
     else:
         begins = definitions.verb_begins
 
+    # Check if the final letter is "z"
+    if re.search(r'z$', new_verb) and len(new_verb) > 1:
+        definitions.non_gajra_ends["present"]["1S"] = "ë"
+    else:
+        definitions.non_gajra_ends["present"]["1S"] = "i"
+
     # If the verb ending is gajra...
     if is_gajra:
-        # Add an "e" if the ending is disallowed word-finally
+        # Add an "i" if the ending is disallowed word-finally
         if re.search(r'([bcdfgjklmnpqrstvxzž])([bcdfgjklmnpqrstvxzž])$', new_verb):
             new_verb = re.sub(r'([bcdfgjklmnpqrstvxzž])([bcdfgjklmnpqrstvxzž])$', r'\g<1>\g<2>i', new_verb)
         endings = definitions.gajra_ends
     else:
         endings = definitions.non_gajra_ends
-
-    # Check if the final letter is "z"
-    if re.search(r'z$', new_verb) and len(new_verb) > 1:
-        endings["present"]["1S"] = "ë"
-    else:
-        endings["present"]["1S"] = "i"
 
     # Check if the first letter is "t"
     if re.search(r'^t', new_verb):

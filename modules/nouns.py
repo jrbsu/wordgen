@@ -282,7 +282,7 @@ def get_noun_data(current_word, gender, is_special):
 
 def noun_table(current_word, gender, is_special):
     get_noun_data(current_word, gender, is_special)
-    noun_table = f"{{| class='wikitable'\n|+[[Severan:Nouns|Inflection]] of ''{current_word}''\n! colspan='3' rowspan='2' |role\n!ergative\n!accusitive\n!dative\n!absolutive\n|-\n"
+    noun_table = f"{{| class='wikitable'\n|+[[Severan:Nouns|Inflection]] of ''{current_word}''\n! colspan='3' rowspan='2' |role\n!ergative / unmarked\n!accusitive\n!dative\n!absolutive\n|-\n"
     noun_table += make_row("BASE", bold=True)
     noun_table += class_number(6, 2)
     noun_table += top_class(3, "possessive\n(singular)")
