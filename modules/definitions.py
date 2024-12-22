@@ -1,3 +1,4 @@
+gajra_letters = ["c", "d", "g", "k", "l", "n", "r", "s", "t", "x", "z"]
 diphthong_dict = {
     "1": "aj",
     "2": "ij",
@@ -53,14 +54,14 @@ persons = ["1S", "1P", "2", "3S", "3P", "FORM"]
 tenses = ["present", "habitual", "past", "future"]
 
 gajra_ends = {
-    "present": {"1S": "", "1P": "er", "2": "da", "3S": "as", "3P": "ilan", "FORM": "ket"},
+    "present": {"1S": "", "1P": "er", "2": "ad", "3S": "as", "3P": "ilan", "FORM": "ket"},
     "habitual": {"1S": "ne", "1P": "nera", "2": "na", "3S": "anes", "3P": "inen", "FORM": "ket"},
     "past": {"1S": "rë", "1P": "era", "2": "ra", "3S": "arës", "3P": "irën", "FORM": "etrë"},
     "future": {"1S": "", "1P": "", "2": "", "3S": "", "3P": "", "FORM": ""}
 }
 
 non_gajra_ends = {
-    "present": {"1S": "i", "1P": "er", "2": "ada", "3S": "as", "3P": "ilan", "FORM": "eket"},
+    "present": {"1S": "i", "1P": "er", "2": "ad", "3S": "as", "3P": "ilan", "FORM": "eket"},
     "habitual": {"1S": "ene", "1P": "enera", "2": "ana", "3S": "anes", "3P": "inen", "FORM": "eket"},
     "past": {"1S": "erë", "1P": "era", "2": "ara", "3S": "arës", "3P": "irën", "FORM": "etrë"},
     "future": {"1S": "o", "1P": "o", "2": "o", "3S": "o", "3P": "o", "FORM": "o"}

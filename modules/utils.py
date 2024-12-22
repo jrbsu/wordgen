@@ -41,16 +41,16 @@ def quick_mode():
 
 # Dedupe:
 # This will find and eliminate illegal clusters (usually two vowels in a row) and log output to `logs/errorlog.txt`.
-def dedupe(c, e):
+def dedupe(word):
     letterInsert = "j"
     letterRegex = r'\g<1>' + letterInsert + r'\g<2>'
-    new_word = e
+    new_word = word
     # Conversions
     new_word = re.sub(r'tt', r'4', new_word)
     new_word = re.sub(r'kk', r'5', new_word)
     new_word = re.sub(r'i([aeioë])', r'j\g<1>', new_word)
     new_word = re.sub(r'([a-z])\1\1?', r'\g<1>', new_word)
-    if len(e) <= 4:
+    if len(word) <= 4:
         # letter between two vowels
         new_word = re.sub(r'([aeioë])([aeioë])', letterRegex, new_word)
     else:
@@ -66,14 +66,15 @@ def dedupe(c, e):
     new_word = re.sub(r'([mnptkbdg])ë', r'\g<1>e', new_word)
     new_word = re.sub(r'4', r'tt', new_word)
     new_word = re.sub(r'5', r'kk', new_word)
-    # if e != new_word:
-    #     dupeOutput += c + ": "
-    #     dupeOutput += "Had to convert " + e + " to " + new_word + "\n"
     return new_word
 
 #Syllable finder
-def stress(current_word, word, list_needed=False):
-    word = dedupe(current_word, word)
+def stress(word, list_needed=False):
+    # Store the positions of hyphens and then remove them from the word
+    hyphen_positions = [m.start() for m in re.finditer('-', word)]
+    word = word.replace('-', '')
+
+    word = dedupe(word)
     syllableList = []
     holding = re.sub(r'(f|v|s|z|c|x|l|j|r|ž)e', r'\g<1>ë', multiple_replace(definitions.diphthong_dict_inv, word))
     letters = list(re.sub(r'[\s\?]', '', holding))
@@ -127,7 +128,7 @@ def stress_finder(syllables):
 # IPA generation
 def ipa_gen(current_word, is_syllables=False):
     if not is_syllables:
-        syllables = stress(current_word, current_word, True)
+        syllables = stress(current_word, True)
     else:
         syllables = current_word
     IPAList = []

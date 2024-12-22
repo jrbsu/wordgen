@@ -147,7 +147,7 @@ with open(data_file) as f:
                     output += noun_table
                 if re.search(r'adj\.', current_part):
                     output += adj_table
-                if current_word != utils.stress(current_word, current_word, False):
+                if current_word != utils.stress(current_word, False):
                     category += "[[Category:Words with incorrect stress markings]]"
                 output += category
                 if current_word not in words:

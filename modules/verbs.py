@@ -31,11 +31,11 @@ def verb_table(verb_type, verb, current_word):
         verb = re.sub(r'ë$', 'e', verb) + suffix
 
     if verb_type == "normal":
-        verb_table += f"{{| class='wikitable'\n|+Inflection of ''{utils.stress(current_word, verb)}'' (normal form)\n!tense\n!{{{{tooltip|1S|1st-person singular}}}}\n!{{{{tooltip|1P|1st-person plural}}}}\n!{{{{tooltip|2|2nd-person singular/plural}}}}\n!{{{{tooltip|3S|3rd-person singular}}}}\n!{{{{tooltip|3P|3rd-person plural}}}}\n!{{{{tooltip|FORM|formal}}}}\n|-\n"
+        verb_table += f"{{| class='wikitable'\n|+Inflection of ''{utils.stress(verb)}'' (normal form)\n!tense\n!{{{{tooltip|1S|1st-person singular}}}}\n!{{{{tooltip|1P|1st-person plural}}}}\n!{{{{tooltip|2|2nd-person singular/plural}}}}\n!{{{{tooltip|3S|3rd-person singular}}}}\n!{{{{tooltip|3P|3rd-person plural}}}}\n!{{{{tooltip|FORM|formal}}}}\n|-\n"
     elif mutation:
-        verb_table += f"{{| class='wikitable'\n|+Inflection of ''{utils.stress(current_word, re.sub(r'ë$', 'e', verb) + suffix)}'' ({tooltip} form)\n!tense\n!1S\n!1P\n!2\n!3S\n!3P\n!FORM\n|-\n"
+        verb_table += f"{{| class='wikitable'\n|+Inflection of ''{utils.stress(re.sub(r'ë$', 'e', verb) + suffix)}'' ({tooltip} form)\n!tense\n!1S\n!1P\n!2\n!3S\n!3P\n!FORM\n|-\n"
     else:
-        verb_table += f"{{| class='wikitable'\n|+Inflection of ''{utils.stress(current_word, verb)}'' ({tooltip} form)\n!tense\n!1S\n!1P\n!2\n!3S\n!3P\n!FORM\n|-\n"
+        verb_table += f"{{| class='wikitable'\n|+Inflection of ''{utils.stress(verb)}'' ({tooltip} form)\n!tense\n!1S\n!1P\n!2\n!3S\n!3P\n!FORM\n|-\n"
 
     # Remove the final <i>
     new_verb = re.sub(r'[iëe]$', "", verb)
@@ -77,26 +77,26 @@ def verb_table(verb_type, verb, current_word):
         for person in definitions.persons:
             if tense != "future":
                 if not mutation:
-                    verb_table += f"|[[{utils.stress(current_word, replace_e(new_verb) + endings[tense][person])}]]\n"
-                    generated_words.append(utils.stress(current_word, replace_e(new_verb) + endings[tense][person]))
+                    verb_table += f"|{utils.stress(replace_e(new_verb) + endings[tense][person])}\n"
+                    generated_words.append(utils.stress(replace_e(new_verb) + endings[tense][person]))
                 else:
-                    verb_table += f"|[[{utils.stress(current_word, replace_e(new_verb + endings[tense][person]) + suffix)}]]\n"
-                    generated_words.append(utils.stress(current_word, replace_e(new_verb + endings[tense][person]) + suffix))
+                    verb_table += f"|{utils.stress(replace_e(new_verb + endings[tense][person]) + suffix)}\n"
+                    generated_words.append(utils.stress(replace_e(new_verb + endings[tense][person]) + suffix))
             if tense == "future":
                 if mutation:
-                    verb_table += f"|[[{utils.stress(current_word, begins[tense][person] + replace_e(re.sub(r'ž', 'z', new_verb) + endings[tense][person]) + suffix)}]]\n"
-                    generated_words.append(utils.stress(current_word, begins[tense][person] + replace_e(re.sub(r'ž', 'z', new_verb) + endings[tense][person]) + suffix))
+                    verb_table += f"|{utils.stress(begins[tense][person] + replace_e(re.sub(r'ž', 'z', new_verb) + endings[tense][person]) + suffix)}\n"
+                    generated_words.append(utils.stress(begins[tense][person] + replace_e(re.sub(r'ž', 'z', new_verb) + endings[tense][person]) + suffix))
                 else: # FUT, mutation type
-                    verb_table += f"|[[{utils.stress(current_word, begins[tense][person] + replace_e(re.sub(r'ž', 'z', new_verb) + endings[tense][person]))}]]\n"
-                    generated_words.append(utils.stress(current_word, begins[tense][person] + replace_e(re.sub(r'ž', 'z', new_verb) + endings[tense][person])))
+                    verb_table += f"|{utils.stress(begins[tense][person] + replace_e(re.sub(r'ž', 'z', new_verb) + endings[tense][person]))}\n"
+                    generated_words.append(utils.stress(begins[tense][person] + replace_e(re.sub(r'ž', 'z', new_verb) + endings[tense][person])))
         verb_table += "|-\n"
     
     if verb_type == "normal":
-        gerund = utils.stress(current_word, replace_e(current_word + "ma"))
-        verb_table += f"|-\n!gerund\n|colspan=7|[[{gerund}]]\n"
+        gerund = utils.stress(replace_e(current_word + "ma"))
+        verb_table += f"|-\n!gerund\n|colspan=7|{gerund}\n"
         generated_words.append(gerund)
         # FIXME: remove this probably
-        gerunds.append(f"{gerund}\tg.\tgerund form of ''[[{current_word}]]''.\t{current_word}")
+        gerunds.append(f"{gerund}\tg.\tgerund form of ''{current_word}''.\t{current_word}")
 
     verb_table += "|}\n"
     return verb_table, generated_words, gerunds
